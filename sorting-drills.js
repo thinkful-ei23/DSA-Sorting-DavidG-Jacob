@@ -6,6 +6,7 @@ let quickSortCount = 0;
 let mergeSortCount = 0;
 
 function swap(array, i, j){
+  quickSortCount++;
   const tmp = array[i];
   array[i] = array[j];
   array[j] = tmp;
@@ -26,6 +27,7 @@ function partition(array, start, end){
   const pivot = array[end - 1];
   let j = start;
   for(let i = start; i < end -1; i++){
+    quickSortCount++;
     if(array[i] <= pivot){
       swap(array, i, j);
       j++;
@@ -36,7 +38,7 @@ function partition(array, start, end){
 }
 
 quickSort(data);
-console.log(`QUICKSORT took ${quickSortCount}`);
+console.log(`Quicksort took ${quickSortCount}`);
 
 function mergeSort(array) {
   mergeSortCount++
@@ -57,6 +59,7 @@ function merge(left, right, array) {
   let rightIndex = 0;
   let outputIndex = 0;
   while (leftIndex < left.length && rightIndex < right.length) {
+    mergeSortCount++;
     if (left[leftIndex] < right[rightIndex]) {
       array[outputIndex++] = left[leftIndex++];
     }
@@ -65,9 +68,11 @@ function merge(left, right, array) {
     }
   }
   for (let i = leftIndex; i < left.length; i++) {
+    mergeSortCount++;
     array[outputIndex++] = left[i];
   }
   for (let i = rightIndex; i < right.length; i++) {
+    mergeSortCount++;
     array[outputIndex++] = right[i];
   } 
   return array;
