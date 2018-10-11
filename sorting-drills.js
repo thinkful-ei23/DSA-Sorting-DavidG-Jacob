@@ -116,3 +116,49 @@ function randomSort(array){
 }
 
 console.log(randomSort(data2));
+
+const bookArray = ['Scarlet Letter', 'Frankenstein', 'Adventures of Huckleberry Fin','Sense and Sensibility', 'War and Peace', 'Moby Dick', 'Walden', 'Clean Code', 'Pragmatic Programmer', 'How to Win Friends and Influence People', 'Odyssey', 'Crime and Punishment','Killing the SS', 'The Wonky Donkey', 'Next Person You Meet in Heaven', 'War', 'Animal Farm', 'Clock Makers Daughter', 'Trust', 'Underworld' ]
+
+let bookSortCount = 0;
+
+function bookSort(array) {
+  bookSortCount++;
+  if (array.length <= 1) {
+    return array;
+  }
+  const middle = Math.floor(array.length / 2);
+  let left = array.slice(0, middle);
+  let right = array.slice(middle, array.length);
+
+  left = bookSort(left);
+  right = bookSort(right);
+  return merge(left, right, array);
+};
+
+function merge(left, right, array) {
+  let leftIndex = 0;
+  let rightIndex = 0;
+  let outputIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    bookSortCount++;
+    if (left[leftIndex].toLowerCase() < right[rightIndex].toLowerCase()) {
+      array[outputIndex++] = left[leftIndex++];
+    }
+    else {
+      array[outputIndex++] = right[rightIndex++];
+    }
+  }
+  for (let i = leftIndex; i < left.length; i++) {
+    bookSortCount++;
+    array[outputIndex++] = left[i];
+  }
+  for (let i = rightIndex; i < right.length; i++) {
+    bookSortCount++;
+    array[outputIndex++] = right[i];
+  } 
+  return array;
+};
+
+console.log(bookSort(bookArray));
+console.log(bookSortCount)
+
